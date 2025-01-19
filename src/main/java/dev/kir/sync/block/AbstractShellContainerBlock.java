@@ -127,7 +127,7 @@ public abstract class AbstractShellContainerBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         boolean bottom = isBottom(state);
         BlockPos bottomPos = bottom ? pos : pos.down();
         if (!world.isClient && player.isCreative()) {
@@ -139,7 +139,7 @@ public abstract class AbstractShellContainerBlock extends BlockWithEntity {
                 }
             }
         }
-        return super.onBreak(world, pos, state, player);
+        super.onBreak(world, pos, state, player);
     }
 
     @Override

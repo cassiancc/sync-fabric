@@ -288,7 +288,7 @@ public class ShellState {
         ItemEntity item = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack);
         item.setPickupDelay(40);
        if (world instanceof ServerWorld) {
-           item.setThrower(((ServerWorld) world).getEntity(this.getOwnerUuid()));
+           item.setThrower(this.getOwnerUuid());
        }
 
         float h = world.random.nextFloat() * 0.5F;

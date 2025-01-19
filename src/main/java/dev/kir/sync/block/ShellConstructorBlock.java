@@ -11,12 +11,6 @@ public class ShellConstructorBlock extends AbstractShellContainerBlock {
     public ShellConstructorBlock(Settings settings) {
         super(settings);
     }
-    public static final MapCodec<ShellConstructorBlock> CODEC = createCodec(ShellConstructorBlock::new);
-
-    @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return CODEC;
-    }
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

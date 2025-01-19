@@ -55,7 +55,7 @@ abstract class EntityRenderDispatcherMixin {
     @Inject(method = "getRenderer", at = @At("HEAD"), cancellable = true)
     private <T extends Entity> void getRenderer(T entity, CallbackInfoReturnable<EntityRenderer<? super T>> cir) {
         if (entity instanceof ShellEntity shell) {
-            EntityRenderer<? extends PlayerEntity> renderer = this.shellRenderers.get(shell.getSkinTextures().model().getName());
+            EntityRenderer<? extends PlayerEntity> renderer = this.shellRenderers.get(shell.getModel());
             cir.setReturnValue((EntityRenderer<? super T>)renderer);
 
         }

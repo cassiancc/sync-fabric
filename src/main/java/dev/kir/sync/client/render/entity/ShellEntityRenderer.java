@@ -41,7 +41,7 @@ public class ShellEntityRenderer extends PlayerEntityRenderer {
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(yaw));
 
             this.applyStateToModel(this.shellModel, shell.getState());
-            VertexConsumer consumer = this.getVertexConsumerForPartiallyTexturedEntity(shell, progress, this.shellModel.getLayer(shell.getSkinTextures().texture()), vertexConsumers);
+            VertexConsumer consumer = this.getVertexConsumerForPartiallyTexturedEntity(shell, progress, this.shellModel.getLayer(shell.getSkinTexture()), vertexConsumers);
             this.shellModel.render(matrices, consumer, light, getOverlay(player, tickDelta), 1F, 1F, 1F, 1F);
             if (progress >= ShellState.PROGRESS_DONE) {
                 for (FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> feature : this.features) {

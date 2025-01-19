@@ -9,13 +9,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
-
-import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
 public class ArrowButtonWidget extends ButtonWidget {
@@ -73,8 +70,7 @@ public class ArrowButtonWidget extends ButtonWidget {
     }
 
     @Override
-    public void renderWidget(DrawContext drawContext, int mouseX, int mouseY, float delta) {
-        drawContext.getMatrices().push();
+    protected void renderButton(DrawContext drawContext, int mouseX, int mouseY, float delta) {
         this.type.transform(drawContext.getMatrices(), this.getX(), this.getY(), this.width, this.height);
         RenderSystemUtil.drawRectangle(drawContext.getMatrices(), this.x0, this.y0, this.stickWidth, this.stickHeight, this.borderRadius, 1F, -this.angle, this.step, color[0], color[1], color[2], color[3]);
         RenderSystemUtil.drawRectangle(drawContext.getMatrices(), this.x1, this.y1, this.stickWidth, this.stickHeight, this.borderRadius, 1F, this.angle, this.step, color[0], color[1], color[2], color[3]);

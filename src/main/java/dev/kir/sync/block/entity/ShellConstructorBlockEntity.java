@@ -114,7 +114,7 @@ public class ShellConstructorBlockEntity extends AbstractShellContainerBlockEnti
                 bottom.shell.setProgress(bottom.shell.getProgress() + (float)amount / requiredEnergyAmount);
             }
         });
-        return MathHelper.clamp(amount, 0, maxEnergy);
+        return (long) MathHelper.clamp(amount, 0, maxEnergy);
     }
 
     @Override

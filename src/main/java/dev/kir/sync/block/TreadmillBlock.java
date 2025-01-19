@@ -1,6 +1,5 @@
 package dev.kir.sync.block;
 
-import com.mojang.serialization.MapCodec;
 import dev.kir.sync.block.entity.SyncBlockEntities;
 import dev.kir.sync.block.entity.TickableBlockEntity;
 import dev.kir.sync.block.entity.TreadmillBlockEntity;
@@ -48,12 +47,6 @@ public class TreadmillBlock extends HorizontalFacingBlock implements BlockEntity
         this.setDefaultState(this.stateManager.getDefaultState().with(PART, Part.BACK));
     }
 
-    public static final MapCodec<TreadmillBlock> CODEC = createCodec(TreadmillBlock::new);
-
-    @Override
-    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
-        return CODEC;
-    }
 
     public static boolean isBack(BlockState state) {
         Part part = state.get(PART);
@@ -130,7 +123,7 @@ public class TreadmillBlock extends HorizontalFacingBlock implements BlockEntity
     }
 
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient && player.isCreative()) {
             Part part = state.get(PART);
             if (part == Part.FRONT) {
@@ -142,7 +135,7 @@ public class TreadmillBlock extends HorizontalFacingBlock implements BlockEntity
                 }
             }
         }
-        return super.onBreak(world, pos, state, player);
+        super.onBreak(world, pos, state, player);
     }
 
     @Override

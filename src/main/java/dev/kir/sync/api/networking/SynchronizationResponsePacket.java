@@ -10,7 +10,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -65,7 +64,7 @@ public class SynchronizationResponsePacket implements ClientPlayerPacket {
         this.targetWorld = buffer.readIdentifier();
         this.targetPos = buffer.readBlockPos();
         this.targetFacing = Direction.byId(buffer.readVarInt());
-        this.storedState = buffer.readBoolean() ? ShellState.fromNbt((NbtCompound) buffer.readNbt(NbtSizeTracker.ofUnlimitedBytes())) : null;
+        this.storedState = buffer.readBoolean() ? ShellState.fromNbt(buffer.readNbt()) : null;
     }
 
     @Override

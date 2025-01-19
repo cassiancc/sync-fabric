@@ -148,17 +148,17 @@ public class ShellSelectorGUI extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext drawContext, int mouseX, int mouseY, float delta) {
+    public void renderBackground(DrawContext drawContext) {
         if (Objects.requireNonNull(this.client).world != null) {
             drawContext.fillGradient(0, 0, this.width, this.height, BACKGROUND_COLOR, BACKGROUND_COLOR);
         } else {
-            super.renderBackground(drawContext, mouseX, mouseY, delta);
+            super.renderBackground(drawContext);
         }
     }
 
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float delta) {
-        this.renderBackground(drawContext, mouseX, mouseY, delta);
+        this.renderBackground(drawContext);
         MSAAFramebuffer.use(MSAAFramebuffer.MAX_SAMPLES, () -> super.render(drawContext, mouseX, mouseY, delta));
         this.renderTooltips(drawContext, mouseX, mouseY);
     }

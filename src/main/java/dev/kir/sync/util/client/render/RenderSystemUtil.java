@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 @Environment(EnvType.CLIENT)
 public final class RenderSystemUtil {
     public static final int MAX_LIGHT_LEVEL = (15 << 20) | (15 << 4);
-    private static final BufferBuilderStorage BUFFER_BUILDER_STORAGE = new BufferBuilderStorage(4);
+    private static final BufferBuilderStorage BUFFER_BUILDER_STORAGE = new BufferBuilderStorage();
 
     public static void drawTriangleStrip(Consumer<VertexConsumer> consumer) {
         drawTriangleStrip(consumer, VertexFormats.POSITION_COLOR);

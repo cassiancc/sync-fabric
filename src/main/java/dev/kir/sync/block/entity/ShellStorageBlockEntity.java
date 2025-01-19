@@ -76,7 +76,7 @@ public class ShellStorageBlockEntity extends AbstractShellContainerBlockEntity i
         }
 
         if (!isReceivingRedstonePower && hasEnergy) {
-            this.storedEnergy = MathHelper.clamp(this.storedEnergy - config.shellStorageConsumption(), 0, config.shellStorageCapacity());
+            this.storedEnergy = (long) MathHelper.clamp(this.storedEnergy - config.shellStorageConsumption(), 0, config.shellStorageCapacity());
         }
     }
 
@@ -146,8 +146,8 @@ public class ShellStorageBlockEntity extends AbstractShellContainerBlockEntity i
         }
 
         long capacity = bottom.getCapacity();
-        long maxEnergy = MathHelper.clamp(capacity - bottom.storedEnergy, 0, capacity);
-        long inserted = MathHelper.clamp(amount, 0, maxEnergy);
+        long maxEnergy = (long) MathHelper.clamp(capacity - bottom.storedEnergy, 0, capacity);
+        long inserted = (long) MathHelper.clamp(amount, 0, maxEnergy);
         context.addCloseCallback((ctx, result) -> {
             if (result.wasCommitted()) {
                 bottom.storedEnergy += inserted;

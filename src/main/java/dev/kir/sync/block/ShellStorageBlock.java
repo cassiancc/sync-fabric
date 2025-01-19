@@ -25,12 +25,6 @@ public class ShellStorageBlock extends AbstractShellContainerBlock {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(OPEN, false).with(ENABLED, false).with(POWERED, false));
     }
-    public static final MapCodec<ShellStorageBlock> CODEC = createCodec(ShellStorageBlock::new);
-
-    @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return CODEC;
-    }
 
     public static boolean isEnabled(BlockState state) {
         return state.get(ENABLED);

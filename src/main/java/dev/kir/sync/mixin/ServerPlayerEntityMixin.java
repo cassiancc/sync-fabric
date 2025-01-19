@@ -339,7 +339,7 @@ abstract class ServerPlayerEntityMixin extends PlayerEntity implements ServerShe
     @Unique
     private void sendDeathMessageInChat() {
         Text text = this.getDamageTracker().getDeathMessage();
-        this.networkHandler.send(new DeathMessageS2CPacket(this.getId(), text), PacketCallbacks.of(() -> {
+        this.networkHandler.sendPacket(new DeathMessageS2CPacket(this.getId(), text), PacketCallbacks.of(() -> {
             String truncatedString = text.asTruncatedString(256);
             Text messageWasTooLong = Text.translatable("death.attack.message_too_long", Text.literal(truncatedString).formatted(Formatting.YELLOW));
             Text magic = Text.translatable("death.attack.even_more_magic", this.getDisplayName()).styled((style) -> style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, messageWasTooLong)));
@@ -446,11 +446,11 @@ abstract class ServerPlayerEntityMixin extends PlayerEntity implements ServerShe
             return;
         }
 
-        ServerWorld serverWorld = (ServerWorld)this.getServerWorld();
+        ServerWorld serverWorld = this.getServerWorld();
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity)(Object)this;
 
         WorldProperties worldProperties = targetWorld.getLevelProperties();
-        serverPlayer.networkHandler.sendPacket(new PlayerRespawnS2CPacket(new CommonPlayerSpawnInfo(targetWorld.getDimensionKey(), targetWorld.getRegistryKey(), BiomeAccess.hashSeed(targetWorld.getSeed()), serverPlayer.interactionManager.getGameMode(), serverPlayer.interactionManager.getPreviousGameMode(), targetWorld.isDebugWorld(), targetWorld.isFlat(), this.getLastDeathPos(), this.getId()), (byte) 3));
+        serverPlayer.networkHandler.sendPacket(new PlayerRespawnS2CPacket(targetWorld.getDimensionKey(), targetWorld.getRegistryKey(), BiomeAccess.hashSeed(targetWorld.getSeed()), serverPlayer.interactionManager.getGameMode(), serverPlayer.interactionManager.getPreviousGameMode(), targetWorld.isDebugWorld(), targetWorld.isFlat(), (byte) 1, this.getLastDeathPos(), 3));
         serverPlayer.networkHandler.sendPacket(new DifficultyS2CPacket(worldProperties.getDifficulty(), worldProperties.isDifficultyLocked()));
         PlayerManager playerManager = Objects.requireNonNull(this.getWorld().getServer()).getPlayerManager();
         playerManager.sendCommandTree(serverPlayer);
